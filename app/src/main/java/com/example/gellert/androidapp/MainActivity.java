@@ -10,6 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +39,44 @@ public class MainActivity extends AppCompatActivity {
         });
 
         barChart = (BarChart) findViewById(R.id.bargraph);
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        barEntries.add(new BarEntry(44f,0));
+        barEntries.add(new BarEntry(88f,1));
+        barEntries.add(new BarEntry(12f,2));
+        barEntries.add(new BarEntry(19f,3));
+
+
+        ArrayList<BarEntry> theDates = new ArrayList<BarEntry>();
+        theDates.add(new BarEntry(44,0));
+        theDates.add(new BarEntry(44,0));
+        theDates.add(new BarEntry(44,0));
+        theDates.add(new BarEntry(44,0));
+
+        BarDataSet theDatesSet = new BarDataSet(theDates,"Dates");
+
+        BarDataSet set1;
+
+        set1 = new BarDataSet(barEntries, "The year 2017");
+        set1.setColors(ColorTemplate.MATERIAL_COLORS);
+
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        dataSets.add(set1);
+
+        BarData oData = new BarData(dataSets);
+
+
+        oData.setValueTextSize(10f);
+        oData.setBarWidth(0.9f);
+
+
+        //BarData oData= new BarData(theDates,barDataSet);
+        barChart.setData(oData);
+
+        barChart.setTouchEnabled(true);
+        barChart.setDragEnabled(true);
+        barChart.setScaleEnabled(true);
+
     }
 
     @Override
